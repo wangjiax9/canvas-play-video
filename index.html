@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>Canvas播放视频</title>
+	</head>
+	<body>
+		<div class="p">
+			<video id="video" style="display: none;width:1px;height:1px" webkit-playsinline="" playsinline="true"
+				 x5-video-player-type="h5" x5-video-player-fullscreen="false">
+				<source src="https://gameapp.fp.ps.netease.com/file/5a965c0eadce5fd5c203eeb4iBQzKMji" type="video/mp4"></source>
+			</video>
+		</div>
+		<button id="btn">播放</button>
+		<div class="cp">
+			<canvas id="cvs" width="800" height="200"></canvas>
+		</div>
+		<script type="text/javascript">
+			var v = document.getElementById("video");
+			var cvs = document.getElementById("cvs");
+			var ctx = cvs.getContext('2d');
+			v.addEventListener('play',function() { 
+			  var i = window.setInterval(function() {
+			    ctx.drawImage(v, 0, 0, 270, 135);
+			  }, 30);
+			  v.addEventListener('pause',function() {window.clearInterval(i);},false);
+			  v.addEventListener('ended',function() {clearInterval(i);},false);
+			},false);
+			document.querySelector("#btn").onclick = function(){
+				v.play();
+			}
+		</script>
+	</body>
+</html>
